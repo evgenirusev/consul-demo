@@ -1,0 +1,5 @@
+{
+    "ui": true,
+    "data-dir": "/tmp/consul",
+    "retry-join": 172.20.20.10
+}
