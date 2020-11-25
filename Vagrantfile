@@ -43,18 +43,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       server.vm.network "private_network", ip: "172.20.20.10"
   end
 
-  config.vm.define "client1" do |client1|
-      client1.vm.hostname = "client1"
-      client1.vm.network "private_network", ip: "172.20.20.11"
+  config.vm.define "lb" do |lb|
+    lb.vm.hostname = "lb"
+    lb.vm.network "private_network", ip: "172.20.20.11"
   end
 
-  config.vm.define "client2" do |client2|
-      client2.vm.hostname = "client2"
-      client2.vm.network "private_network", ip: "172.20.20.12"
-  end
-
-  config.vm.define "client3" do |client3|
-      client3.vm.hostname = "client3"
-      client3.vm.network "private_network", ip: "172.20.20.13"
-  end
+    (1..3).each do |i|
+        config.vm.define "client#{i}" do |web|
+          web.vm.hostname = "client#{i}"
+          web.vm.network "private_network", ip: "172.20.20.2#{i}"
+        end
+    end
 end
